@@ -14,10 +14,16 @@ def genREADME():
         '```shell script',
     ]
 
-    if not os.path.exists('config/'):
-        os.mkdir('config')
-    os.system('scrapy list > config/scrapylist.txt')
-    with open('config/scrapylist.txt') as f:
+    if os.path.exists('data/update.md'):
+        with open('data/update.md') as f:
+            update = f.read().rstrip()
+        head.insert(1, update)
+        head.insert(1, '')
+
+    if not os.path.exists('data/'):
+        os.mkdir('data')
+    os.system('scrapy list > data/scrapylist.txt')
+    with open('data/scrapylist.txt') as f:
         spiders = f.read().splitlines()
     lines = ['scrapy crawl {spider} -o data/{spider}.jsonlines'.format(spider=spider) for
              spider in spiders]
