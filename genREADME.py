@@ -14,8 +14,8 @@ def genREADME():
         '```shell script',
     ]
 
-    if os.path.exists('data/update.md'):
-        with open('data/update.md') as f:
+    if os.path.exists('update.md'):
+        with open('update.md') as f:
             update = f.read().rstrip()
         head.insert(1, update)
         head.insert(1, '')
