@@ -15,12 +15,12 @@ class MWeiboSpider(scrapy.Spider):
     ]
 
     def parse(self, response):
-        result = json.loads(response.text)
-        if result.get('ok'):
-            for card in result['data']['cards']:
-                yield {
-                    'user': card['mblog']['user']['screen_name'],
-                    'text': card['mblog']['longText']['longTextContent'] if card['mblog'].get(
-                        'isLongText') else BeautifulSoup(card['mblog']['text'], 'lxml').get_text(),
-                    'image_urls': [pic['large']['url'] for pic in card['mblog']['pics']],
-                }
+        for card in json.loads(response.text)['data']['cards']:
+            if not card['mblog'].get('pics'):
+                continue
+            yield {
+                'user': card['mblog']['user']['screen_name'],
+                'text': card['mblog']['longText']['longTextContent'] if card['mblog'].get(
+                    'isLongText') else BeautifulSoup(card['mblog']['text'], 'lxml').get_text(),
+                'image_urls': [pic['large']['url'] for pic in card['mblog']['pics']],
+            }
