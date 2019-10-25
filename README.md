@@ -25,4 +25,4 @@ scrapy crawl sscat-xyz.tumblr -o data/sscat-xyz.tumblr.jsonlines
 
 若要在下一次启动爬虫时恢复工作进度，则需要在命令后面加上 `-s JOBDIR=crawls/{spider_name}`
 
-下载的图片在 `data/full`，相关信息在 `{spider_name}.jsonlines` 里
+下载的图片在 `data/full`，相关信息在 `data/{spider_name}.jsonlines` 里
