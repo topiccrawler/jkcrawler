@@ -1,9 +1,11 @@
 import os
+from os import path
 
 
 def genREADME():
+    cwd = os.getcwd()
     head = [
-        '# jkcrawler',
+        f'# {path.basename(cwd)}',
         '',
         '使用 Scrapy 写成的 JK 爬虫，图片源自哔哩哔哩、Tumblr、Instagram，以及微博、Twitter',
         '',
@@ -24,13 +26,12 @@ def genREADME():
         head.insert(1, update)
         head.insert(1, '')
 
-    if not os.path.exists('data/'):
+    if not path.exists('data/'):
         os.mkdir('data')
     os.system('scrapy list > data/scrapylist.txt')
     with open('data/scrapylist.txt') as f:
         spiders = f.read().splitlines()
-    lines = ['scrapy crawl {spider} -o data/{spider}.jsonlines'.format(spider=spider) for
-             spider in spiders]
+    lines = [f'scrapy crawl {spider} -o data/{spider}.jsonlines' for spider in spiders]
 
     tail = [
         '```',
