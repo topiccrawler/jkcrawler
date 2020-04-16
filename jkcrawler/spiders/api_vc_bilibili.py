@@ -11,10 +11,10 @@ class ApiVcBilibiliSpider(scrapy.Spider):
         for i in range(600)]
 
     def parse(self, response):
-        for i in json.loads(response.text)['data']['items']:
+        for item in json.loads(response.text)['data']['items']:
             yield response.follow(
-                'https://api.vc.bilibili.com/link_draw/v1/doc/detail?doc_id=' + str(i['item']['doc_id']),
-                meta={'image_urls': [picture['img_src'] for picture in i['item']['pictures']]},
+                'https://api.vc.bilibili.com/link_draw/v1/doc/detail?doc_id=' + str(item['item']['doc_id']),
+                meta={'image_urls': [picture['img_src'] for picture in item['item']['pictures']]},
                 callback=self.parse_jk,
             )
 
@@ -23,7 +23,7 @@ class ApiVcBilibiliSpider(scrapy.Spider):
         title = item['title']
         tags = [tag['tag'] for tag in item['tags']]
         description = item['description']
-        if any('jk' in i for i in (title, *tags, description)):
+        if any('jk' in i.lower() for i in (title, *tags, description)):
             yield {
                 'title': title,
                 'tags': tags,

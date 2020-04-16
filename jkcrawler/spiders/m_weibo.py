@@ -18,7 +18,7 @@ class MWeiboSpider(scrapy.Spider):
 
     def parse(self, response):
         for card in json.loads(response.text)['data']['cards']:
-            if not card['mblog'].get('pics'):
+            if 'mblog' not in card or not card['mblog'].get('pics'):
                 continue
             yield {
                 'user': card['mblog']['user']['screen_name'],
