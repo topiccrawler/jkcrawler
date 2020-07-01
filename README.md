@@ -20,7 +20,6 @@ scrapy crawl instagram -o data/instagram.jsonlines
 scrapy crawl m.weibo -o data/m.weibo.jsonlines
 scrapy crawl makooooon.tumblr -o data/makooooon.tumblr.jsonlines
 scrapy crawl ryoryo-chan.tumblr -o data/ryoryo-chan.tumblr.jsonlines
-scrapy crawl sscat-xyz.tumblr -o data/sscat-xyz.tumblr.jsonlines
 ```
 
 若要在下一次启动爬虫时恢复工作进度，则需要在命令后面加上 `-s JOBDIR=crawls/{spider_name}`
