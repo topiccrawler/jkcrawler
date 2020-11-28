@@ -36,9 +36,9 @@ def genREADME():
     tail = [
         '```',
         '',
-        '若要在下一次启动爬虫时恢复工作进度，则需要在命令后面加上 `-s JOBDIR=crawls/{spider_name}`',
+        '若要在下一次启动爬虫时恢复工作进度，则需要在命令后面加上 <code>-s JOBDIR=crawls/<var>{spider_name}</var></code>',
         '',
-        '下载的图片在 `data/full/`，相关信息在 `data/{spider_name}.jsonlines` 里',
+        '下载的图片在 `data/full/`，相关信息在 <code>data/<var>{spider_name}</var>.jsonlines</code> 里',
         '',
     ]
 
